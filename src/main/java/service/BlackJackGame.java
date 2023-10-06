@@ -1,0 +1,71 @@
+package service;
+
+import controller.dto.PlayerDeck;
+import domain.Card;
+import domain.Cards;
+import domain.Dealer;
+import domain.Player;
+import domain.Players;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BlackJackGame {
+
+    private final int INITIAL_CARDS_COUNT=2;
+
+    private final Dealer dealer;
+    private final Players players;
+    private final Cards cards;
+
+    private BlackJackGame(Dealer dealer,Players players,Cards cards) {
+        this.dealer=dealer;
+        this.players=players;
+        this.cards=cards;
+    }
+
+    public static BlackJackGame createDefaultGame() {
+        Dealer defaultDealer = Dealer.createDefaultDealer("딜러");
+        Cards cards = Cards.createDefaultCards();
+        Players players = Players.createInitialPlayers(new ArrayList<>());
+        return new BlackJackGame(defaultDealer, players,cards);
+    }
+
+    public void firstDealOutCards() {
+        List<Card> dealerCards = pickCards(INITIAL_CARDS_COUNT);
+        dealer.addCardsToDeck(dealerCards);
+
+        players.actEachPlayer((player)-> {
+            List<Card> pickedCards = pickCards(INITIAL_CARDS_COUNT);
+            player.addCardsToDeck(pickedCards);
+        });
+    }
+
+    public void giveCardToPlayer(Player targetPlayer) {
+        Card pickedCard=pickCard();
+        targetPlayer.addCardToDeck(pickedCard);
+    }
+
+    public List<String> getPlayerNameValues() {
+        return players.getNameValues();
+    }
+
+    private List<Card> pickCards(int cardCount) {
+        return cards.getCardsByCardCount(cardCount);
+    }
+
+    private Card pickCard() {
+        return cards.getCard();
+    }
+
+    public void addPlayerToGame(final Player player) {
+        players.addPlayer(player);
+    }
+
+    public List<PlayerDeck> getAllPlayers() {
+        return players.getPlayers();
+    }
+
+    public PlayerDeck getDealer() {
+        return dealer.toCommonDto();
+    }
+}
