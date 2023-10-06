@@ -35,7 +35,7 @@ public class Player {
         return deckSum > MAX_NUMBER;
     }
 
-    public int getResult() {
+    public int getCardSum() {
         return deck.getSum();
     }
 }

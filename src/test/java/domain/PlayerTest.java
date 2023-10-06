@@ -52,7 +52,7 @@ class PlayerTest {
         player.addCardToDeck(cards);
 
         // then
-        assertEquals(player.getResult(), 12+11);
+        assertEquals(player.getCardSum(), 12+11);
     }
 
     private List<Card> firstPickCards(int firstNum, int secondNum) {
