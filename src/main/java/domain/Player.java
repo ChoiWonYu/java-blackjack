@@ -1,0 +1,41 @@
+package domain;
+
+import java.util.List;
+
+public class Player {
+
+    private final int MAX_NUMBER=21;
+
+    private final String name;
+    private final Deck deck;
+
+
+    private Player(String name,Deck deck) {
+        this.name=name;
+        this.deck=deck;
+    }
+
+
+    public static Player createDefault(final String name) {
+        Deck initialDeck=Deck.createDefaultDeck();
+        return new Player(name,initialDeck);
+    }
+
+    public void PickCards(final List<Card> firstCards) {
+        deck.addCards(firstCards);
+    }
+
+    public boolean isBlackJack() {
+        int deckSum = deck.getSum();
+        return deckSum==MAX_NUMBER;
+    }
+
+    public boolean isBurst() {
+        int deckSum=deck.getSum();
+        return deckSum > MAX_NUMBER;
+    }
+
+    public int getResult() {
+        return deck.getSum();
+    }
+}
