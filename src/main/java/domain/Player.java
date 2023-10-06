@@ -21,7 +21,7 @@ public class Player {
         return new Player(name,initialDeck);
     }
 
-    public void PickCards(final List<Card> firstCards) {
+    public void addCardToDeck(final List<Card> firstCards) {
         deck.addCards(firstCards);
     }
 

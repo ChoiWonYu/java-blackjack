@@ -24,7 +24,7 @@ class PlayerTest {
         List<Card> cards=firstPickCards(10,11);
 
         // when
-        player.PickCards(cards);
+        player.addCardToDeck(cards);
 
         // then
         assertTrue(player.isBlackJack());
@@ -37,8 +37,7 @@ class PlayerTest {
         List<Card> cards = firstPickCards(12, 11);
 
         // when
-        player.PickCards(cards);
-
+        player.addCardToDeck(cards);
         // then
         assertTrue(player.isBurst());
     }
@@ -50,7 +49,7 @@ class PlayerTest {
         List<Card> cards = firstPickCards(12, 11);
 
         // when
-        player.PickCards(cards);
+        player.addCardToDeck(cards);
 
         // then
         assertEquals(player.getResult(), 12+11);
