@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Player {
 
-    private final int MAX_NUMBER=21;
+    protected final int MAX_NUMBER=21;
 
-    private final String name;
-    private final Deck deck;
+    protected final String name;
+    protected final Deck deck;
 
 
-    private Player(String name,Deck deck) {
+    protected Player(String name,Deck deck) {
         this.name=name;
         this.deck=deck;
     }
