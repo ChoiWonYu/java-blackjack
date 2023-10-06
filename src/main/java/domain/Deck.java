@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Deck {
 
@@ -31,4 +32,11 @@ public class Deck {
         return deckSum;
     }
 
+    public List<String> getCardInfo() {
+        return deck.stream()
+            .map(card ->
+                card.getNumber() + card.getShape()
+            )
+            .collect(Collectors.toList());
+    }
 }
