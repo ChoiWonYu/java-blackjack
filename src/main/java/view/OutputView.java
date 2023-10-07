@@ -10,6 +10,7 @@ public class OutputView {
     }
 
     public static void askPlayerRevenues(String name) {
+        newLine();
         System.out.printf("%s의 배팅 금액은?\n", name);
     }
 
