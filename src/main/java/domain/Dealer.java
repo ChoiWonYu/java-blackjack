@@ -15,6 +15,6 @@ public class Dealer extends Player {
     }
 
     public boolean haveToPickMoreCard() {
-        return this.getCardSum() >= STANDARD_OF_ADDITIONAl_CARD;
+        return this.getCardSum() < STANDARD_OF_ADDITIONAl_CARD;
     }
 }
