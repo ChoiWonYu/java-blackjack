@@ -2,6 +2,7 @@ package domain;
 
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
+import controller.dto.PlayerRevenue;
 import java.util.List;
 
 public class Player {
@@ -10,17 +11,20 @@ public class Player {
 
     protected final Name name;
     protected final Deck deck;
+    protected final Revenue revenue;
     private BettingAmount bettingAmount;
 
-    protected Player(Name name, Deck deck) {
+    protected Player(Name name, Deck deck, Revenue revenue) {
         this.name = name;
         this.deck = deck;
+        this.revenue = revenue;
     }
 
-    private Player(Name name, Deck deck, BettingAmount bettingAmount) {
+    private Player(Name name, Deck deck, BettingAmount bettingAmount, Revenue revenue) {
         this.name = name;
         this.deck = deck;
         this.bettingAmount = bettingAmount;
+        this.revenue = revenue;
     }
 
 
@@ -28,7 +32,8 @@ public class Player {
         Deck initialDeck = Deck.createDefaultDeck();
         Name playersName = new Name(name);
         BettingAmount bettingAmount = new BettingAmount(amount);
-        return new Player(playersName, initialDeck, bettingAmount);
+        Revenue initialRevenue = Revenue.createDefaultRevenue();
+        return new Player(playersName, initialDeck, bettingAmount, initialRevenue);
     }
 
     public void addCardsToDeck(final List<Card> firstCards) {
@@ -67,12 +72,33 @@ public class Player {
     }
 
     public PlayerDeckResult toDtoIncludeResult() {
-        int scoreSum=getCardSum();
-        PlayerDeck commonDto=toCommonDto();
+        int scoreSum = getCardSum();
+        PlayerDeck commonDto = toCommonDto();
         return PlayerDeckResult.of(commonDto, scoreSum);
     }
 
     public boolean hasSameNameValue(String playerName) {
         return name.isSameName(playerName);
+    }
+
+    public void lostAmount(double amount) {
+        revenue.lostAmount(amount);
+    }
+
+    public void winAmount(double amount) {
+        revenue.winAmount(amount);
+    }
+
+    public int getBettingAmount() {
+        return bettingAmount.getBettingAmount();
+    }
+
+    public boolean hasBiggerSum(final int cardSum) {
+        int myCardSum=getCardSum();
+        return myCardSum>cardSum;
+    }
+
+    public PlayerRevenue toRevenueDto() {
+        return new PlayerRevenue(getNameValue(),revenue.getRevenue());
     }
 }
