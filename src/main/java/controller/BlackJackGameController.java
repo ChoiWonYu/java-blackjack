@@ -2,6 +2,7 @@ package controller;
 
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
+import controller.dto.PlayerRevenue;
 import domain.Player;
 import java.util.Arrays;
 import java.util.List;
@@ -38,11 +39,21 @@ public class BlackJackGameController {
 
         List<PlayerDeck> allPlayers = game.getAllPlayers();
         actEachPlayerDto(allPlayers,OutputView::showPlayerDeck);
+        OutputView.newLine();
 
         actEachPlayerDto(allPlayers,this::receiveCards);
-        checkDealerDeck();
+        OutputView.newLine();
 
+        checkDealerDeck();
+        OutputView.newLine();
+
+        game.calculateRevenue();
         showResult();
+        OutputView.newLine();
+
+        OutputView.noticeRevenueDescription();
+        List<PlayerRevenue> revenues=game.getPlayersRevenue();
+        revenues.forEach(OutputView::showRevenues);
     }
 
     private void showResult() {
@@ -67,21 +78,22 @@ public class BlackJackGameController {
     }
 
     private void receiveCards(final PlayerDeck player) {
+        PlayerDeck currentPlayer=player;
         while (true) {
             OutputView.askMoreCards(player);
             String answer=reader.getInputLine();
             boolean isYes = validateAnswer(answer);
             if (!isYes) {
-                OutputView.showPlayerDeck(player);
+                OutputView.showPlayerDeck(currentPlayer);
                 break;
             }
-            PlayerDeck playerAddedCard=game.giveCardToPlayer(player.getName());
+            currentPlayer=game.giveCardToPlayer(player.getName());
             boolean canContinue=game.canPlayerContinueGame(player.getName());
             if (!canContinue) {
                 OutputView.showIsBurst();
                 break;
             }
-            OutputView.showPlayerDeck(playerAddedCard);
+            OutputView.showPlayerDeck(currentPlayer);
         }
     }
 
