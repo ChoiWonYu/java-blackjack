@@ -2,6 +2,7 @@ package domain;
 
 import controller.dto.PlayerDeck;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -39,5 +40,12 @@ public class Players {
         return players.stream()
             .map(Player::toCommonDto)
             .collect(Collectors.toList());
+    }
+
+    public Player getPlayerByName(final String playerName) {
+        return players.stream()
+            .filter(player -> player.hasSameNameValue(playerName))
+            .findFirst()
+            .orElseThrow(()-> new NoSuchElementException());
     }
 }
