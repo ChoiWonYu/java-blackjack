@@ -1,6 +1,7 @@
 package domain;
 
 import controller.dto.PlayerDeck;
+import controller.dto.PlayerDeckResult;
 import java.util.List;
 
 public class Player {
@@ -63,6 +64,12 @@ public class Player {
     public PlayerDeck toCommonDto() {
         List<String> cardInfos = getCardInfos();
         return new PlayerDeck(getNameValue(), String.join(", ", cardInfos));
+    }
+
+    public PlayerDeckResult toDtoIncludeResult() {
+        int scoreSum=getCardSum();
+        PlayerDeck commonDto=toCommonDto();
+        return PlayerDeckResult.of(commonDto, scoreSum);
     }
 
     public boolean hasSameNameValue(String playerName) {
