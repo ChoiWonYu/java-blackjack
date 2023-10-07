@@ -2,6 +2,7 @@ package view;
 
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
+import controller.dto.PlayerRevenue;
 
 public class OutputView {
 
@@ -15,6 +16,7 @@ public class OutputView {
     }
 
     public static void noticeFirstDealOut(String names) {
+        newLine();
         System.out.printf("딜러와 %s에게 2장씩 나누었습니다.\n", names);
     }
 
@@ -41,5 +43,17 @@ public class OutputView {
     public static void showDeckWithResult(final PlayerDeckResult result) {
         System.out.printf("%s: %s - 결과: %d\n", result.getName(), result.getCards(),
             result.getResult());
+    }
+
+    public static void showRevenues(final PlayerRevenue revenue) {
+        System.out.printf("%s: %.0f\n", revenue.getName(), revenue.getRevenue());
+    }
+
+    public static void newLine() {
+        System.out.println();
+    }
+
+    public static void noticeRevenueDescription() {
+        System.out.println("## 최종 수익");
     }
 }
