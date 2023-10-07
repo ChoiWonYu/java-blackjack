@@ -15,6 +15,6 @@ public class InputView {
     }
 
     public int getInteger() {
-        return reader.nextInt();
+        return Integer.parseInt(reader.nextLine());
     }
 }
