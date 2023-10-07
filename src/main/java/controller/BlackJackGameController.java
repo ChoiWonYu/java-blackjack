@@ -1,6 +1,7 @@
 package controller;
 
 import controller.dto.PlayerDeck;
+import controller.dto.PlayerDeckResult;
 import domain.Player;
 import java.util.Arrays;
 import java.util.List;
@@ -32,13 +33,33 @@ public class BlackJackGameController {
         List<String> playerNames = game.getPlayerNameValues();
         OutputView.noticeFirstDealOut(String.join(",", playerNames));
 
-        PlayerDeck dealerInfo = game.getDealer();
-        OutputView.showDealerDeck(dealerInfo);
+        PlayerDeck dealerDeck = game.getDealer();
+        OutputView.showDealerDeck(dealerDeck);
 
         List<PlayerDeck> allPlayers = game.getAllPlayers();
-        allPlayers.forEach(OutputView::showPlayerDeck);
+        actEachPlayerDto(allPlayers,OutputView::showPlayerDeck);
 
         actEachPlayerDto(allPlayers,this::receiveCards);
+        checkDealerDeck();
+
+        showResult();
+    }
+
+    private void showResult() {
+        PlayerDeckResult dealerResult=game.getDealerResult();
+        List<PlayerDeckResult> playerResults=game.getAllPlayerResults();
+
+        playerResults.add(0, dealerResult);
+        playerResults.forEach(OutputView::showDeckWithResult);
+    }
+
+    private void checkDealerDeck() {
+        boolean needMoreCard = game.haveToPickMoreCard();
+        if(!needMoreCard){
+            return;
+        }
+        OutputView.noticeDealerPickedCard();
+        game.giveDealerMoreCard();
     }
 
     private void actEachPlayerDto(final List<PlayerDeck> allPlayers,final Consumer<PlayerDeck> act) {
