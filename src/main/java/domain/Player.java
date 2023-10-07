@@ -94,11 +94,11 @@ public class Player {
     }
 
     public boolean hasBiggerSum(final int cardSum) {
-        int myCardSum=getCardSum();
-        return myCardSum>cardSum;
+        int myCardSum = getCardSum();
+        return myCardSum > cardSum;
     }
 
     public PlayerRevenue toRevenueDto() {
-        return new PlayerRevenue(getNameValue(),revenue.getRevenue());
+        return new PlayerRevenue(getNameValue(), revenue.getRevenue());
     }
 }

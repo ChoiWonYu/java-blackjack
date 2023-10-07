@@ -13,7 +13,7 @@ public class Dealer extends Player {
         Deck initialDeck = Deck.createDefaultDeck();
         Name initialName = new Name(DEFAULT_DEALER_NAME);
         Revenue initialRevenue = Revenue.createDefaultRevenue();
-        return new Dealer(initialName, initialDeck,initialRevenue);
+        return new Dealer(initialName, initialDeck, initialRevenue);
     }
 
     public boolean haveToPickMoreCard() {

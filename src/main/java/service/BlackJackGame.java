@@ -110,9 +110,9 @@ public class BlackJackGame {
     }
 
     public List<PlayerRevenue> getPlayersRevenue() {
-        PlayerRevenue dealerRevenue=dealer.toRevenueDto();
-        List<PlayerRevenue> playerRevenues=players.getPlayerRevenueResults();
-        playerRevenues.add(0,dealerRevenue);
+        PlayerRevenue dealerRevenue = dealer.toRevenueDto();
+        List<PlayerRevenue> playerRevenues = players.getPlayerRevenueResults();
+        playerRevenues.add(0, dealerRevenue);
         return new ArrayList<>(playerRevenues);
     }
 }

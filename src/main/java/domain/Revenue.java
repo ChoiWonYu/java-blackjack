@@ -2,12 +2,12 @@ package domain;
 
 public class Revenue {
 
-    private static final Double DEFAULT_REVENUE=0.0;
+    private static final Double DEFAULT_REVENUE = 0.0;
 
     private Double revenue;
 
     private Revenue(Double revenue) {
-        this.revenue=revenue;
+        this.revenue = revenue;
     }
 
     public static Revenue createDefaultRevenue() {
@@ -15,11 +15,11 @@ public class Revenue {
     }
 
     public void lostAmount(final double amount) {
-        this.revenue-=amount;
+        this.revenue -= amount;
     }
 
     public void winAmount(final double amount) {
-        this.revenue+=amount;
+        this.revenue += amount;
     }
 
     public double getRevenue() {

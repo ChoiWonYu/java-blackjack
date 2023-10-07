@@ -5,7 +5,7 @@ import domain.Player;
 
 public class RevenueCalculator {
 
-    private final static double BLACK_JACK_DIVIDEND_YIELD=1.5;
+    private final static double BLACK_JACK_DIVIDEND_YIELD = 1.5;
 
     private final Dealer dealer;
     private Player player;
@@ -23,20 +23,20 @@ public class RevenueCalculator {
         if (player == null) {
             throw new IllegalArgumentException();
         }
-        this.player=player;
+        this.player = player;
     }
 
     public void calculateRevenue(Player player) {
         setPlayer(player);
 
-        boolean haveToHandleBlackJack=anyoneBlackJack();
-        boolean haveToHandleBurst=anyoneBurst();
-        if(haveToHandleBurst){
+        boolean haveToHandleBlackJack = anyoneBlackJack();
+        boolean haveToHandleBurst = anyoneBurst();
+        if (haveToHandleBurst) {
             handleBurst();
             return;
         }
 
-        if(haveToHandleBlackJack) {
+        if (haveToHandleBlackJack) {
             handleBlackJack();
             return;
         }
@@ -45,7 +45,7 @@ public class RevenueCalculator {
     }
 
     private void handleCommonRevenue() {
-        boolean isPlayerWin=player.hasBiggerSum(dealer.getCardSum());
+        boolean isPlayerWin = player.hasBiggerSum(dealer.getCardSum());
         double playerBettingAmount = player.getBettingAmount();
         if (isPlayerWin) {
             player.winAmount(playerBettingAmount);
@@ -76,7 +76,7 @@ public class RevenueCalculator {
     }
 
     private void handleBurst() {
-        boolean isPlayerBurst=player.isBurst();
+        boolean isPlayerBurst = player.isBurst();
         double playerBettingAmount = player.getBettingAmount();
 
         if (isPlayerBurst) {
@@ -95,10 +95,10 @@ public class RevenueCalculator {
     }
 
     private boolean anyoneBlackJack() {
-        return dealer.isBlackJack()||player.isBlackJack();
+        return dealer.isBlackJack() || player.isBlackJack();
     }
 
     private boolean anyoneBurst() {
-        return dealer.isBurst()||player.isBurst();
+        return dealer.isBurst() || player.isBurst();
     }
 }

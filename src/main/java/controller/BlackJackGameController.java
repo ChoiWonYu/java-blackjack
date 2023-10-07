@@ -38,10 +38,10 @@ public class BlackJackGameController {
         OutputView.showDealerDeck(dealerDeck);
 
         List<PlayerDeck> allPlayers = game.getAllPlayers();
-        actEachPlayerDto(allPlayers,OutputView::showPlayerDeck);
+        actEachPlayerDto(allPlayers, OutputView::showPlayerDeck);
         OutputView.newLine();
 
-        actEachPlayerDto(allPlayers,this::receiveCards);
+        actEachPlayerDto(allPlayers, this::receiveCards);
         OutputView.newLine();
 
         checkDealerDeck();
@@ -52,13 +52,13 @@ public class BlackJackGameController {
         OutputView.newLine();
 
         OutputView.noticeRevenueDescription();
-        List<PlayerRevenue> revenues=game.getPlayersRevenue();
+        List<PlayerRevenue> revenues = game.getPlayersRevenue();
         revenues.forEach(OutputView::showRevenues);
     }
 
     private void showResult() {
-        PlayerDeckResult dealerResult=game.getDealerResult();
-        List<PlayerDeckResult> playerResults=game.getAllPlayerResults();
+        PlayerDeckResult dealerResult = game.getDealerResult();
+        List<PlayerDeckResult> playerResults = game.getAllPlayerResults();
 
         playerResults.add(0, dealerResult);
         playerResults.forEach(OutputView::showDeckWithResult);
@@ -66,29 +66,30 @@ public class BlackJackGameController {
 
     private void checkDealerDeck() {
         boolean needMoreCard = game.haveToPickMoreCard();
-        if(!needMoreCard){
+        if (!needMoreCard) {
             return;
         }
         OutputView.noticeDealerPickedCard();
         game.giveDealerMoreCard();
     }
 
-    private void actEachPlayerDto(final List<PlayerDeck> allPlayers,final Consumer<PlayerDeck> act) {
+    private void actEachPlayerDto(final List<PlayerDeck> allPlayers,
+        final Consumer<PlayerDeck> act) {
         allPlayers.forEach(act);
     }
 
     private void receiveCards(final PlayerDeck player) {
-        PlayerDeck currentPlayer=player;
+        PlayerDeck currentPlayer = player;
         while (true) {
             OutputView.askMoreCards(player);
-            String answer=reader.getInputLine();
+            String answer = reader.getInputLine();
             boolean isYes = validateAnswer(answer);
             if (!isYes) {
                 OutputView.showPlayerDeck(currentPlayer);
                 break;
             }
-            currentPlayer=game.giveCardToPlayer(player.getName());
-            boolean canContinue=game.canPlayerContinueGame(player.getName());
+            currentPlayer = game.giveCardToPlayer(player.getName());
+            boolean canContinue = game.canPlayerContinueGame(player.getName());
             if (!canContinue) {
                 OutputView.showIsBurst();
                 break;
@@ -98,10 +99,10 @@ public class BlackJackGameController {
     }
 
     private boolean validateAnswer(final String answer) {
-        if(answer.equals("y")){
+        if (answer.equals("y")) {
             return true;
         }
-        if(answer.equals("n")){
+        if (answer.equals("n")) {
             return false;
         }
         throw new IllegalArgumentException();
@@ -125,5 +126,4 @@ public class BlackJackGameController {
         Player player = Player.createDefault(name, bettingAmount);
         game.addPlayerToGame(player);
     }
-
 }
