@@ -70,4 +70,13 @@ public class BlackJackGame {
     public PlayerDeck getDealer() {
         return dealer.toCommonDto();
     }
+
+    public boolean canPlayerContinueGame(final String name) {
+        Player player = players.getPlayerByName(name);
+        if(player.isBurst()){
+            return false;
+        }
+
+        return true;
+    }
 }
