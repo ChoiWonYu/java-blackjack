@@ -9,6 +9,10 @@ public class PlayerDeckResult extends PlayerDeck {
         this.result = result;
     }
 
+    public static PlayerDeckResult of(PlayerDeck playerDeck, int result) {
+        return new PlayerDeckResult(playerDeck.getName(), playerDeck.getCards(), result);
+    }
+
     public int getResult() {
         return result;
     }
