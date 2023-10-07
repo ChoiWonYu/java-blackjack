@@ -1,6 +1,7 @@
 package domain;
 
 import controller.dto.PlayerDeck;
+import controller.dto.PlayerDeckResult;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
@@ -46,6 +47,12 @@ public class Players {
         return players.stream()
             .filter(player -> player.hasSameNameValue(playerName))
             .findFirst()
-            .orElseThrow(()-> new NoSuchElementException());
+            .orElseThrow(() -> new NoSuchElementException());
+    }
+
+    public List<PlayerDeckResult> getPlayerResults() {
+        return players.stream()
+            .map(Player::toDtoIncludeResult)
+            .collect(Collectors.toList());
     }
 }
