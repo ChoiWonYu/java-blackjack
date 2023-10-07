@@ -64,4 +64,8 @@ public class Player {
         List<String> cardInfos = getCardInfos();
         return new PlayerDeck(getNameValue(), String.join(", ", cardInfos));
     }
+
+    public boolean hasSameNameValue(String playerName) {
+        return name.isSameName(playerName);
+    }
 }
