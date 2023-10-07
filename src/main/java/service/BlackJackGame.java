@@ -1,6 +1,7 @@
 package service;
 
 import controller.dto.PlayerDeck;
+import controller.dto.PlayerDeckResult;
 import domain.Card;
 import domain.Cards;
 import domain.Dealer;
@@ -78,5 +79,23 @@ public class BlackJackGame {
         }
 
         return true;
+    }
+
+    public boolean haveToPickMoreCard() {
+        return dealer.haveToPickMoreCard();
+    }
+
+    public PlayerDeck giveDealerMoreCard() {
+        Card pickedCard=pickCard();
+        dealer.addCardToDeck(pickedCard);
+        return dealer.toCommonDto();
+    }
+
+    public PlayerDeckResult getDealerResult() {
+        return dealer.toDtoIncludeResult();
+    }
+
+    public List<PlayerDeckResult> getAllPlayerResults() {
+        return players.getPlayerResults();
     }
 }
