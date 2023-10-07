@@ -12,4 +12,7 @@ public class Name {
         return name;
     }
 
+    public boolean isSameName(final String playerName) {
+        return name.equals(playerName);
+    }
 }
