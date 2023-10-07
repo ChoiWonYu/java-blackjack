@@ -40,9 +40,11 @@ public class BlackJackGame {
         });
     }
 
-    public void giveCardToPlayer(Player targetPlayer) {
+    public PlayerDeck giveCardToPlayer(String playerName) {
         Card pickedCard=pickCard();
-        targetPlayer.addCardToDeck(pickedCard);
+        Player player=players.getPlayerByName(playerName);
+        player.addCardToDeck(pickedCard);
+        return player.toCommonDto();
     }
 
     public List<String> getPlayerNameValues() {
