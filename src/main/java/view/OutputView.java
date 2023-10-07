@@ -17,6 +17,18 @@ public class OutputView {
     }
 
     public static void showPlayerDeck(final PlayerDeck commonDto) {
+        System.out.printf("%s카드: %s\n",commonDto.getName(),commonDto.getCards());
+    }
+
+    public static void showDealerDeck(final PlayerDeck commonDto) {
         System.out.printf("%s: %s\n",commonDto.getName(),commonDto.getCards());
+    }
+
+    public static void askMoreCards(final PlayerDeck commonDto) {
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)\n",commonDto.getName());
+    }
+
+    public static void showIsBurst() {
+        System.out.println("Burst!");
     }
 }
