@@ -1,6 +1,7 @@
 package view;
 
 import controller.dto.PlayerDeck;
+import controller.dto.PlayerDeckResult;
 
 public class OutputView {
 
@@ -9,7 +10,7 @@ public class OutputView {
     }
 
     public static void askPlayerRevenues(String name) {
-        System.out.printf("%s의 배팅 금액은?\n",name);
+        System.out.printf("%s의 배팅 금액은?\n", name);
     }
 
     public static void noticeFirstDealOut(String names) {
@@ -17,18 +18,27 @@ public class OutputView {
     }
 
     public static void showPlayerDeck(final PlayerDeck commonDto) {
-        System.out.printf("%s카드: %s\n",commonDto.getName(),commonDto.getCards());
+        System.out.printf("%s카드: %s\n", commonDto.getName(), commonDto.getCards());
     }
 
     public static void showDealerDeck(final PlayerDeck commonDto) {
-        System.out.printf("%s: %s\n",commonDto.getName(),commonDto.getCards());
+        System.out.printf("%s: %s\n", commonDto.getName(), commonDto.getCards());
     }
 
     public static void askMoreCards(final PlayerDeck commonDto) {
-        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)\n",commonDto.getName());
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)\n", commonDto.getName());
     }
 
     public static void showIsBurst() {
         System.out.println("Burst!");
+    }
+
+    public static void noticeDealerPickedCard() {
+        System.out.println("딜러는 16장 이하라 한장의 카드를 더 받았습니다.");
+    }
+
+    public static void showDeckWithResult(final PlayerDeckResult result) {
+        System.out.printf("%s: %s - 결과: %d\n", result.getName(), result.getCards(),
+            result.getResult());
     }
 }
