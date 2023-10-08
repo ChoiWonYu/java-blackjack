@@ -31,6 +31,7 @@ public class Players {
     }
 
     public void addPlayer(final Player player) {
+        validateDuplicateName(player);
         players.add(player);
     }
 

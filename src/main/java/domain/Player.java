@@ -1,13 +1,16 @@
 package domain;
 
+import java.util.List;
+
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
 import domain.card.Card;
 import domain.card.Deck;
-import java.util.List;
 
 public class Player {
+
+    private final static String PLAYER_DTO_CARD_DIVIDER = ", ";
 
     protected final Name name;
     protected final Deck deck;
@@ -34,6 +37,10 @@ public class Player {
         BettingAmount bettingAmount = new BettingAmount(amount);
         Revenue initialRevenue = Revenue.createDefaultRevenue();
         return new Player(playersName, initialDeck, bettingAmount, initialRevenue);
+    }
+
+    public boolean hasSameName(final Player player) {
+        return name.hasSameValue(player.getNameValue());
     }
 
     public void addCardsToDeck(final List<Card> firstCards) {
@@ -66,7 +73,13 @@ public class Player {
 
     public PlayerDeck toCommonDto() {
         List<String> cardInfos = getCardInfos();
-        return new PlayerDeck(getNameValue(), String.join(", ", cardInfos));
+        return new PlayerDeck(getNameValue(), String.join(PLAYER_DTO_CARD_DIVIDER, cardInfos));
+    }
+
+    public void hideCardFromDto(PlayerDeck commonDto) {
+        String cardsDto = commonDto.getCards();
+        String[] cards = cardsDto.split(PLAYER_DTO_CARD_DIVIDER);
+        commonDto.setCards(cards[0]);
     }
 
     public PlayerDeckResult toDtoIncludeResult() {
