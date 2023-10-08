@@ -3,6 +3,8 @@ package domain;
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
+import domain.card.Card;
+import domain.card.Deck;
 import java.util.List;
 
 public class Player {

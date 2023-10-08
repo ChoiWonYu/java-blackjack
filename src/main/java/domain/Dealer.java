@@ -1,5 +1,7 @@
 package domain;
 
+import domain.card.Deck;
+
 public class Dealer extends Player {
 
     private final static int STANDARD_OF_ADDITIONAl_CARD = 17;
