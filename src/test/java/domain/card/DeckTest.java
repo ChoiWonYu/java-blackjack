@@ -57,7 +57,7 @@ class DeckTest {
 
     @Test
     @DisplayName("에이스가 있을 때, 11 값을 가졌을 때 Burst라면 값을 1로 바꾼다.")
-    void when_contains_ace() {
+    void when_contains_ace_and_is_burst_change_primary_value_to_1() {
         // given
         pickTwoCard(ACE, KING);
         addCardToDeck(SEVEN);
