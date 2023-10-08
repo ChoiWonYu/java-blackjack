@@ -37,7 +37,7 @@ public class OutputView {
     }
 
     public static void noticeDealerPickedCard() {
-        System.out.println("딜러는 16장 이하라 한장의 카드를 더 받았습니다.");
+        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
     }
 
     public static void showDeckWithResult(final PlayerDeckResult result) {
