@@ -37,6 +37,11 @@ public class BlackJackGame {
         return new BlackJackGame(defaultDealer, players, cards, revenueCalculator);
     }
 
+    public void createGamePlayer(final String name, final int bettingAmount) {
+        Player player = Player.createDefault(name, bettingAmount);
+        players.addPlayer(player);
+    }
+
     public void firstDealOutCards() {
         List<Card> dealerCards = pickCards(INITIAL_CARDS_COUNT);
         dealer.addCardsToDeck(dealerCards);
@@ -64,10 +69,6 @@ public class BlackJackGame {
 
     private Card pickCard() {
         return cards.getCard();
-    }
-
-    public void addPlayerToGame(final Player player) {
-        players.addPlayer(player);
     }
 
     public List<PlayerDeck> getAllPlayers() {
