@@ -81,18 +81,14 @@ public class BlackJackGame {
 
     public boolean canPlayerContinueGame(final String name) {
         Player player = players.getPlayerByName(name);
-        if (player.isBurst()) {
-            return false;
-        }
-
-        return true;
+        return !player.isBurst();
     }
 
     public boolean haveToPickMoreCard() {
         return dealer.haveToPickMoreCard();
     }
 
-    public PlayerDeck giveDealerMoreCard() {
+    public void giveDealerMoreCard() {
         Card pickedCard = pickCard();
         dealer.addCardToDeck(pickedCard);
         return dealer.toCommonDto();
