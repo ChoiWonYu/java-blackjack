@@ -25,15 +25,6 @@ public class Cards {
         return new Cards(defaultCards);
     }
 
-    public List<Card> getCardsByCardCount(final int cardCount) {
-        List<Card> pickedCards = new ArrayList<>();
-        for (int i = 0; i < cardCount; i++) {
-            Card pickedCard = getCard();
-            pickedCards.add(pickedCard);
-        }
-        return pickedCards;
-    }
-
     public Card getCard() {
         Random random = new Random();
 

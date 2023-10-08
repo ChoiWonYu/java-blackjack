@@ -43,11 +43,11 @@ public class BlackJackGame {
     }
 
     public void firstDealOutCards() {
-        List<Card> dealerCards = pickCards(INITIAL_CARDS_COUNT);
+        List<Card> dealerCards = cards.pickInitialCards(INITIAL_CARDS_COUNT);
         dealer.addCardsToDeck(dealerCards);
 
         players.actEachPlayer((player) -> {
-            List<Card> pickedCards = pickCards(INITIAL_CARDS_COUNT);
+            List<Card> pickedCards = cards.pickInitialCards(INITIAL_CARDS_COUNT);
             player.addCardsToDeck(pickedCards);
         });
     }
@@ -111,5 +111,9 @@ public class BlackJackGame {
         List<PlayerRevenue> playerRevenues = players.getPlayerRevenueResults();
         playerRevenues.add(0, dealerRevenue);
         return new ArrayList<>(playerRevenues);
+    }
+
+    private Card pickCard() {
+        return cards.getCard();
     }
 }
