@@ -17,4 +17,8 @@ public class PlayerDeck {
     public String getCards() {
         return cards;
     }
+
+    public void setCards(final String cards) {
+        this.cards = cards;
+    }
 }

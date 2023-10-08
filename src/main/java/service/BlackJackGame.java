@@ -63,20 +63,14 @@ public class BlackJackGame {
         return players.getNameValues();
     }
 
-    private List<Card> pickCards(int cardCount) {
-        return cards.getCardsByCardCount(cardCount);
-    }
-
-    private Card pickCard() {
-        return cards.getCard();
-    }
-
     public List<PlayerDeck> getAllPlayers() {
         return players.getPlayers();
     }
 
     public PlayerDeck getDealer() {
-        return dealer.toCommonDto();
+        PlayerDeck commonDto = dealer.toCommonDto();
+        dealer.hideCardFromDto(commonDto);
+        return commonDto;
     }
 
     public boolean canPlayerContinueGame(final String name) {
@@ -91,7 +85,6 @@ public class BlackJackGame {
     public void giveDealerMoreCard() {
         Card pickedCard = pickCard();
         dealer.addCardToDeck(pickedCard);
-        return dealer.toCommonDto();
     }
 
     public PlayerDeckResult getDealerResult() {
