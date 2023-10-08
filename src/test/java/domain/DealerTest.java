@@ -1,7 +1,10 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static domain.card.Shape.CLOVER;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domain.card.Card;
+import domain.card.Value;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,25 +16,25 @@ class DealerTest {
 
     @BeforeEach
     void init() {
-        this.dealer = Dealer.createDefaultDealer("test dealer");
+        this.dealer = Dealer.createDefaultDealer();
     }
 
     @Test
     @DisplayName("17이상이면 카드를 또 뽑아야 한다고 알려준다.")
     public void when_sum_over_17_have_to_pick_more_card() {
         // given
-        List<Card> cards = firstPickCards(7, 10);
+        List<Card> cards = firstPickCards(Value.SEVEN, Value.KING);
 
         // when
-        dealer.addCardToDeck(cards);
+        dealer.addCardsToDeck(cards);
 
         //then
         assertTrue(dealer.haveToPickMoreCard());
     }
 
-    private List<Card> firstPickCards(int firstNum, int secondNum) {
-        Card firstCard = new Card(firstNum, "클로버");
-        Card secondCard = new Card(secondNum, "클로버");
+    private List<Card> firstPickCards(Value firstValue, Value secondValue) {
+        Card firstCard = new Card(firstValue, CLOVER);
+        Card secondCard = new Card(secondValue, CLOVER);
 
         return List.of(firstCard, secondCard);
     }
