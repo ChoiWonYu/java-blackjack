@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class Deck {
 
+    protected final int MAX_NUMBER = 21;
+
+
     private final List<Card> deck;
 
     private Deck(List<Card> deck) {
@@ -25,18 +28,52 @@ public class Deck {
     }
 
     public int getSum() {
-        int deckSum = deck.stream()
+        return deck.stream()
             .mapToInt(Card::getNumber)
             .sum();
-
-        return deckSum;
     }
 
     public List<String> getCardInfo() {
         return deck.stream()
             .map(card ->
-                card.getNumber() + card.getShape()
+                card.getDisplay() + card.getShape()
             )
             .collect(Collectors.toList());
+    }
+
+    public boolean isBlackJack() {
+        int deckSum = getBestSum();
+        return deckSum == MAX_NUMBER;
+    }
+
+    public boolean isBurst() {
+        int deckSum = getBestSum();
+        return deckSum > MAX_NUMBER;
+    }
+
+    public boolean hasAce() {
+        return deck.stream()
+            .anyMatch(Card::isAceCard);
+    }
+
+    public void changeAceValue() {
+        deck.stream()
+            .filter(Card::isAceCard)
+            .forEach(Card::changeAceValue);
+    }
+
+    public void findBetterDeck() {
+        int prevSum = getSum();
+        changeAceValue();
+        if ((prevSum > getSum() && prevSum <= MAX_NUMBER) || getSum() > MAX_NUMBER) {
+            changeAceValue();
+        }
+    }
+
+    public int getBestSum() {
+        if (hasAce()) {
+            findBetterDeck();
+        }
+        return getSum();
     }
 }
