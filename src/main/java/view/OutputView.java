@@ -10,7 +10,7 @@ public class OutputView {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
     }
 
-    public static void askPlayerRevenues(String name) {
+    public static void askPlayerBettingAmount(String name) {
         newLine();
         System.out.printf("%s의 배팅 금액은?\n", name);
     }
