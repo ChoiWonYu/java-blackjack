@@ -11,7 +11,7 @@ public class Deck {
 
     private final List<Card> deck;
 
-    private Deck(List<Card> deck) {
+    private Deck(final List<Card> deck) {
         this.deck = deck;
     }
 
@@ -19,11 +19,11 @@ public class Deck {
         return new Deck(new ArrayList<>());
     }
 
-    public void addCard(Card card) {
+    public void addCard(final Card card) {
         deck.add(card);
     }
 
-    public void addCards(List<Card> cards) {
+    public void addCards(final List<Card> cards) {
         deck.addAll(cards);
     }
 

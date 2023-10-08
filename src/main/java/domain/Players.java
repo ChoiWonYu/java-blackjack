@@ -34,6 +34,15 @@ public class Players {
         players.add(player);
     }
 
+    private void validateDuplicateName(final Player targetPlayer) {
+        boolean isDuplicated = players.stream()
+            .anyMatch(player -> player.hasSameName(targetPlayer));
+
+        if(isDuplicated){
+            throw new IllegalArgumentException();
+        }
+    }
+
     public List<PlayerDeck> getPlayers() {
         return players.stream()
             .map(Player::toCommonDto)

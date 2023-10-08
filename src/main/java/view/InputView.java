@@ -6,7 +6,7 @@ public class InputView {
 
     private final Scanner reader;
 
-    public InputView(Scanner reader) {
+    public InputView(final Scanner reader) {
         this.reader = reader;
     }
 

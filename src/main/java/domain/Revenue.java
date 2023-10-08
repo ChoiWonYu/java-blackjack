@@ -6,7 +6,7 @@ public class Revenue {
 
     private Double revenue;
 
-    private Revenue(Double revenue) {
+    private Revenue(final Double revenue) {
         this.revenue = revenue;
     }
 

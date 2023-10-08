@@ -7,7 +7,7 @@ public class Dealer extends Player {
     private final static int STANDARD_OF_ADDITIONAl_CARD = 17;
     private final static String DEFAULT_DEALER_NAME = "딜러";
 
-    private Dealer(Name name, Deck deck, Revenue revenue) {
+    private Dealer(final Name name, final Deck deck, final Revenue revenue) {
         super(name, deck, revenue);
     }
 

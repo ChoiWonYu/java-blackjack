@@ -15,11 +15,11 @@ public enum Value {
     QUEEN("Q", 10, null),
     ACE("A", 11, 1);
 
-    private String display;
+    private final String display;
     private Integer primaryValue;
     private Integer secondValue;
 
-    Value(String display, Integer primaryValue, Integer secondValue) {
+    Value(final String display, final Integer primaryValue, final Integer secondValue) {
         this.display = display;
         this.primaryValue = primaryValue;
         this.secondValue = secondValue;

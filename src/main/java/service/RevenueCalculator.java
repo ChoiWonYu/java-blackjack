@@ -35,12 +35,10 @@ public class RevenueCalculator {
             handleBurst();
             return;
         }
-
         if (haveToHandleBlackJack) {
             handleBlackJack();
             return;
         }
-
         handleCommonRevenue();
     }
 

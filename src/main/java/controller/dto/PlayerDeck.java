@@ -3,9 +3,9 @@ package controller.dto;
 public class PlayerDeck {
 
     protected final String name;
-    protected final String cards;
+    protected String cards;
 
-    public PlayerDeck(String name, String cards) {
+    public PlayerDeck(final String name, final String cards) {
         this.cards = cards;
         this.name = name;
     }

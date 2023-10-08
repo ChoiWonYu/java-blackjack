@@ -14,12 +14,12 @@ public class BlackJackGameController {
     private final InputView reader;
     private final BlackJackGame game;
 
-    private BlackJackGameController(InputView reader, BlackJackGame game) {
+    private BlackJackGameController(final InputView reader, final BlackJackGame game) {
         this.reader = reader;
         this.game = game;
     }
 
-    public static BlackJackGameController createDefaultGameController(InputView reader) {
+    public static BlackJackGameController createDefaultGameController(final InputView reader) {
         BlackJackGame game = BlackJackGame.createDefaultGame();
         return new BlackJackGameController(reader, game);
     }
@@ -48,7 +48,7 @@ public class BlackJackGameController {
 
         OutputView.noticeRevenueDescription();
         List<PlayerRevenue> revenues = game.getPlayersRevenue();
-        actEachPlayer(revenues,OutputView::showRevenues);
+        actEachPlayer(revenues, OutputView::showRevenues);
     }
 
     private void showPlayerNames() {
@@ -58,7 +58,7 @@ public class BlackJackGameController {
 
     private void getPlayers() {
         String[] names = getPlayerNames();
-        actEachPlayer(List.of(names),this::getPlayerBettingAmount);
+        actEachPlayer(List.of(names), this::getPlayerBettingAmount);
     }
 
     private String[] getPlayerNames() {

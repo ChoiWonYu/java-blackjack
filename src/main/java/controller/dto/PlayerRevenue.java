@@ -2,8 +2,8 @@ package controller.dto;
 
 public class PlayerRevenue {
 
-    private String name;
-    private double revenue;
+    private final String name;
+    private final double revenue;
 
     public PlayerRevenue(final String name, final double revenue) {
         this.revenue = revenue;

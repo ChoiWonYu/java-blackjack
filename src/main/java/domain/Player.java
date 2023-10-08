@@ -14,19 +14,19 @@ public class Player {
     protected final Revenue revenue;
     private BettingAmount bettingAmount;
 
-    protected Player(Name name, Deck deck, Revenue revenue) {
+    protected Player(final Name name, final Deck deck, final Revenue revenue) {
         this.name = name;
         this.deck = deck;
         this.revenue = revenue;
     }
 
-    private Player(Name name, Deck deck, BettingAmount bettingAmount, Revenue revenue) {
+    private Player(final Name name, final Deck deck, final BettingAmount bettingAmount,
+        final Revenue revenue) {
         this.name = name;
         this.deck = deck;
         this.bettingAmount = bettingAmount;
         this.revenue = revenue;
     }
-
 
     public static Player createDefault(final String name, final int amount) {
         Deck initialDeck = Deck.createDefaultDeck();
@@ -75,15 +75,15 @@ public class Player {
         return PlayerDeckResult.of(commonDto, scoreSum);
     }
 
-    public boolean hasSameNameValue(String playerName) {
+    public boolean hasSameNameValue(final String playerName) {
         return name.isSameName(playerName);
     }
 
-    public void lostAmount(double amount) {
+    public void lostAmount(final double amount) {
         revenue.lostAmount(amount);
     }
 
-    public void winAmount(double amount) {
+    public void winAmount(final double amount) {
         revenue.winAmount(amount);
     }
 

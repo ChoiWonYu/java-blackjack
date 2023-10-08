@@ -20,7 +20,7 @@ public class BlackJackGame {
     private final Cards cards;
     private final RevenueCalculator calculator;
 
-    private BlackJackGame(Dealer dealer, Players players, Cards cards,
+    private BlackJackGame(final Dealer dealer, final Players players, final Cards cards,
         RevenueCalculator calculator) {
         this.dealer = dealer;
         this.players = players;
@@ -52,7 +52,7 @@ public class BlackJackGame {
         });
     }
 
-    public PlayerDeck giveCardToPlayer(String playerName) {
+    public PlayerDeck giveCardToPlayer(final String playerName) {
         Card pickedCard = pickCard();
         Player player = players.getPlayerByName(playerName);
         player.addCardToDeck(pickedCard);

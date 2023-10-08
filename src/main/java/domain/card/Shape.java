@@ -6,10 +6,10 @@ public enum Shape {
     HEART("하트"),
     DIAMOND("다이아몬드");
 
-    private String shape;
+    private final String shape;
 
-    Shape(String shape) {
-        this.shape=shape;
+    Shape(final String shape) {
+        this.shape = shape;
     }
 
     public String getShape() {
