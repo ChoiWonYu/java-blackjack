@@ -37,9 +37,9 @@ public class Players {
 
     private void validateDuplicateName(final Player targetPlayer) {
         boolean isDuplicated = players.stream()
-            .anyMatch(player -> player.hasSameName(targetPlayer));
+            .anyMatch(player -> player.hasSameNameValue(targetPlayer.getNameValue()));
 
-        if(isDuplicated){
+        if (isDuplicated) {
             throw new IllegalArgumentException();
         }
     }

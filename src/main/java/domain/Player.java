@@ -39,10 +39,6 @@ public class Player {
         return new Player(playersName, initialDeck, bettingAmount, initialRevenue);
     }
 
-    public boolean hasSameName(final Player player) {
-        return name.hasSameValue(player.getNameValue());
-    }
-
     public void addCardsToDeck(final List<Card> firstCards) {
         deck.addCards(firstCards);
     }
