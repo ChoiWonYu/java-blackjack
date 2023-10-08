@@ -3,8 +3,6 @@ package controller;
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
-import domain.Player;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import service.BlackJackGame;
@@ -27,21 +25,18 @@ public class BlackJackGameController {
     }
 
     public void startGame() {
-        String[] names = getPlayerNames();
-        getPlayerBettingAmount(names);
-
+        getPlayers();
         game.firstDealOutCards();
-        List<String> playerNames = game.getPlayerNameValues();
-        OutputView.noticeFirstDealOut(String.join(",", playerNames));
+        showPlayerNames();
 
         PlayerDeck dealerDeck = game.getDealer();
         OutputView.showDealerDeck(dealerDeck);
 
         List<PlayerDeck> allPlayers = game.getAllPlayers();
-        actEachPlayerDto(allPlayers, OutputView::showPlayerDeck);
+        actEachPlayer(allPlayers, OutputView::showPlayerDeck);
         OutputView.newLine();
 
-        actEachPlayerDto(allPlayers, this::receiveCards);
+        actEachPlayer(allPlayers, this::receiveCards);
         OutputView.newLine();
 
         checkDealerDeck();
@@ -53,15 +48,36 @@ public class BlackJackGameController {
 
         OutputView.noticeRevenueDescription();
         List<PlayerRevenue> revenues = game.getPlayersRevenue();
-        revenues.forEach(OutputView::showRevenues);
+        actEachPlayer(revenues,OutputView::showRevenues);
+    }
+
+    private void showPlayerNames() {
+        List<String> playerNames = game.getPlayerNameValues();
+        OutputView.noticeFirstDealOut(String.join(",", playerNames));
+    }
+
+    private void getPlayers() {
+        String[] names = getPlayerNames();
+        actEachPlayer(List.of(names),this::getPlayerBettingAmount);
+    }
+
+    private String[] getPlayerNames() {
+        OutputView.askPlayerNames();
+        String inputNames = reader.getInputLine();
+        return inputNames.split(",");
+    }
+
+    private void getPlayerBettingAmount(final String name) {
+        OutputView.askPlayerBettingAmount(name);
+        int bettingAmount = reader.getInteger();
+        game.createGamePlayer(name, bettingAmount);
     }
 
     private void showResult() {
         PlayerDeckResult dealerResult = game.getDealerResult();
         List<PlayerDeckResult> playerResults = game.getAllPlayerResults();
-
         playerResults.add(0, dealerResult);
-        playerResults.forEach(OutputView::showDeckWithResult);
+        actEachPlayer(playerResults, OutputView::showDeckWithResult);
     }
 
     private void checkDealerDeck() {
@@ -73,8 +89,8 @@ public class BlackJackGameController {
         game.giveDealerMoreCard();
     }
 
-    private void actEachPlayerDto(final List<PlayerDeck> allPlayers,
-        final Consumer<PlayerDeck> act) {
+    private <T> void actEachPlayer(final List<T> allPlayers,
+        final Consumer<T> act) {
         allPlayers.forEach(act);
     }
 
@@ -106,24 +122,5 @@ public class BlackJackGameController {
             return false;
         }
         throw new IllegalArgumentException();
-    }
-
-    private String[] getPlayerNames() {
-        OutputView.askPlayerNames();
-        String inputNames = reader.getInputLine();
-        return inputNames.split(",");
-    }
-
-    private void getPlayerBettingAmount(String[] names) {
-        Arrays.stream(names).forEach(name -> {
-            OutputView.askPlayerRevenues(name);
-            int bettingAmount = reader.getInteger();
-            addPlayerToGame(name, bettingAmount);
-        });
-    }
-
-    private void addPlayerToGame(final String name, final int bettingAmount) {
-        Player player = Player.createDefault(name, bettingAmount);
-        game.addPlayerToGame(player);
     }
 }
