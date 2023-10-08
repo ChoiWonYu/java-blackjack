@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Player {
 
-    protected final int MAX_NUMBER = 21;
-
     protected final Name name;
     protected final Deck deck;
     protected final Revenue revenue;
@@ -47,17 +45,15 @@ public class Player {
     }
 
     public boolean isBlackJack() {
-        int deckSum = deck.getSum();
-        return deckSum == MAX_NUMBER;
+        return deck.isBlackJack();
     }
 
     public boolean isBurst() {
-        int deckSum = deck.getSum();
-        return deckSum > MAX_NUMBER;
+        return deck.isBurst();
     }
 
     public int getCardSum() {
-        return deck.getSum();
+        return deck.getBestSum();
     }
 
     public String getNameValue() {
