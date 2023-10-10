@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 
 class RevenueCalculatorTest {
 
-    private final int PLAYER_BETTING_AMOUNT=1000;
-    private final int BLACKJACK_PLAYER_BETTING_AMOUNT=1500;
+    private final int PLAYER_BETTING_AMOUNT = 1000;
+    private final int BLACKJACK_PLAYER_BETTING_AMOUNT = 1500;
 
     private Dealer dealer;
     private Player player;
@@ -28,24 +28,24 @@ class RevenueCalculatorTest {
 
     @BeforeEach
     void init() {
-        dealer=Dealer.createDefaultDealer();
-        player=Player.createDefault("test",1000);
-        calculator=RevenueCalculator.createCalculatorWithoutPlayer(dealer);
+        dealer = Dealer.createDefaultDealer();
+        player = Player.createDefault("test", 1000);
+        calculator = RevenueCalculator.createCalculatorWithoutPlayer(dealer);
     }
 
     @Test
     @DisplayName("플레이어가 블랙잭일 때, 플레이어는 배팅금의 1.5배를 얻고, 딜러는 그만큼 잃는다.")
     void when_only_player_is_black_jack() {
         // given
-        givePlayerCards(ACE,KING);
-        giveDealerCards(ONE,SEVEN);
+        givePlayerCards(ACE, KING);
+        giveDealerCards(ONE, SEVEN);
 
         // when
         calculator.calculateRevenue(player);
 
         // then
-        assertEquals(getPlayerRevenue(player),BLACKJACK_PLAYER_BETTING_AMOUNT);
-        assertEquals(getPlayerRevenue(dealer),-BLACKJACK_PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(player), BLACKJACK_PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(dealer), -BLACKJACK_PLAYER_BETTING_AMOUNT);
     }
 
     @Test
@@ -59,8 +59,8 @@ class RevenueCalculatorTest {
         calculator.calculateRevenue(player);
 
         // then
-        assertEquals(getPlayerRevenue(player),-PLAYER_BETTING_AMOUNT);
-        assertEquals(getPlayerRevenue(dealer),PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(player), -PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(dealer), PLAYER_BETTING_AMOUNT);
     }
 
     @Test
@@ -74,8 +74,8 @@ class RevenueCalculatorTest {
         calculator.calculateRevenue(player);
 
         // then
-        assertEquals(getPlayerRevenue(player),0);
-        assertEquals(getPlayerRevenue(dealer),0);
+        assertEquals(getPlayerRevenue(player), 0);
+        assertEquals(getPlayerRevenue(dealer), 0);
     }
 
     @Test
@@ -136,13 +136,13 @@ class RevenueCalculatorTest {
     }
 
     private void assertPlayerEarnBettingAmount() {
-        assertEquals(getPlayerRevenue(player),PLAYER_BETTING_AMOUNT);
-        assertEquals(getPlayerRevenue(dealer),-PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(player), PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(dealer), -PLAYER_BETTING_AMOUNT);
     }
 
     private void assertDealerEarnBettingAmount() {
-        assertEquals(getPlayerRevenue(player),-PLAYER_BETTING_AMOUNT);
-        assertEquals(getPlayerRevenue(dealer),PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(player), -PLAYER_BETTING_AMOUNT);
+        assertEquals(getPlayerRevenue(dealer), PLAYER_BETTING_AMOUNT);
     }
 
     private List<Card> pickTwoCards(Value firstValue, Value secondValue) {

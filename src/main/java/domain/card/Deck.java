@@ -8,7 +8,6 @@ public class Deck {
 
     protected final int MAX_NUMBER = 21;
 
-
     private final List<Card> deck;
 
     private Deck(final List<Card> deck) {

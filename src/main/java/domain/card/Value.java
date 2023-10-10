@@ -1,6 +1,7 @@
 package domain.card;
 
 public enum Value {
+
     ONE("1", 1, null),
     TWO("2", 2, null),
     THREE("3", 3, null),
@@ -16,6 +17,7 @@ public enum Value {
     ACE("A", 11, 1);
 
     private final String display;
+
     private Integer primaryValue;
     private Integer secondValue;
 
