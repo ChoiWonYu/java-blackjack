@@ -1,10 +1,10 @@
 package domain;
 
-import static domain.card.Shape.CLOVER;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import domain.card.Card;
 import domain.card.Value;
+import fixture.CardsFixture;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,19 +23,12 @@ class DealerTest {
     @DisplayName("17이상이면 카드를 뽑을 수 없다고 알려준다.")
     public void when_sum_over_17_have_to_pick_more_card() {
         // given
-        List<Card> cards = firstPickCards(Value.SEVEN, Value.KING);
+        List<Card> cards= CardsFixture.pickCards(Value.SEVEN, Value.KING);
 
         // when
         dealer.addCardsToDeck(cards);
 
         //then
         assertFalse(dealer.haveToPickMoreCard());
-    }
-
-    private List<Card> firstPickCards(Value firstValue, Value secondValue) {
-        Card firstCard = new Card(firstValue, CLOVER);
-        Card secondCard = new Card(secondValue, CLOVER);
-
-        return List.of(firstCard, secondCard);
     }
 }

@@ -1,6 +1,5 @@
 package service;
 
-import static domain.card.Shape.CLOVER;
 import static domain.card.Value.ACE;
 import static domain.card.Value.KING;
 import static domain.card.Value.ONE;
@@ -12,6 +11,7 @@ import domain.Dealer;
 import domain.Player;
 import domain.card.Card;
 import domain.card.Value;
+import fixture.CardsFixture;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -145,21 +145,14 @@ class RevenueCalculatorTest {
         assertEquals(getPlayerRevenue(dealer), PLAYER_BETTING_AMOUNT);
     }
 
-    private List<Card> pickTwoCards(Value firstValue, Value secondValue) {
-        Card firstCard = new Card(firstValue, CLOVER);
-        Card secondCard = new Card(secondValue, CLOVER);
-
-        return List.of(firstCard, secondCard);
-    }
-
     private void givePlayerCards(Value firstValue, Value secondValue) {
-        List<Card> playerCards = pickTwoCards(firstValue, secondValue);
-        player.addCardsToDeck(playerCards);
+        List<Card> cards= CardsFixture.pickCards(firstValue, secondValue);
+        player.addCardsToDeck(cards);
     }
 
     private void giveDealerCards(Value firstValue, Value secondValue) {
-        List<Card> dealerCards = pickTwoCards(firstValue, secondValue);
-        dealer.addCardsToDeck(dealerCards);
+        List<Card> cards= CardsFixture.pickCards(firstValue, secondValue);
+        dealer.addCardsToDeck(cards);
     }
 
     private double getPlayerRevenue(Player player) {

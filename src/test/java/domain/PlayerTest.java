@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.card.Card;
-import domain.card.Value;
+import fixture.CardsFixture;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ class PlayerTest {
     @DisplayName("첫 두 장의 카드가 21이면 블랙잭")
     public void when_first_two_cards_sum_21_blackjack() {
         // given
-        List<Card> cards = firstPickCards(KING, ACE);
+        List<Card> cards= CardsFixture.pickCards(KING, ACE);
 
         // when
         player.addCardsToDeck(cards);
@@ -41,7 +41,7 @@ class PlayerTest {
     @DisplayName("카드의 총합이 21을 넘으면 Burst")
     public void when_card_sum_over_21_burst() {
         // given
-        List<Card> cards = firstPickCards(KING, QUEEN);
+        List<Card> cards= CardsFixture.pickCards(KING, QUEEN);
         Card newCard = new Card(JACK, CLOVER);
 
         // when
@@ -60,12 +60,5 @@ class PlayerTest {
         // when & then
         assertThrows(IllegalArgumentException.class, () ->
             Player.createDefault("test", amount));
-    }
-
-    private List<Card> firstPickCards(Value firstValue, Value secondValue) {
-        Card firstCard = new Card(firstValue, CLOVER);
-        Card secondCard = new Card(secondValue, CLOVER);
-
-        return List.of(firstCard, secondCard);
     }
 }
