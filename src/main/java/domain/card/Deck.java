@@ -26,12 +26,6 @@ public class Deck {
         deck.addAll(cards);
     }
 
-    public int getSum() {
-        return deck.stream()
-            .mapToInt(Card::getNumber)
-            .sum();
-    }
-
     public List<String> getCardInfo() {
         return deck.stream()
             .map(card ->
@@ -64,7 +58,9 @@ public class Deck {
     public void findBetterDeck() {
         int prevSum = getSum();
         changeAceValue();
-        if ((prevSum > getSum() && prevSum <= MAX_NUMBER) || getSum() > MAX_NUMBER) {
+        int currentSum = getSum();
+
+        if (isPrevSumBetter(prevSum, currentSum) || currentSum > MAX_NUMBER) {
             changeAceValue();
         }
     }
@@ -74,5 +70,15 @@ public class Deck {
             findBetterDeck();
         }
         return getSum();
+    }
+
+    private int getSum() {
+        return deck.stream()
+            .mapToInt(Card::getNumber)
+            .sum();
+    }
+
+    private boolean isPrevSumBetter(int prevSum, int currentSum) {
+        return currentSum > prevSum && prevSum <= MAX_NUMBER;
     }
 }
