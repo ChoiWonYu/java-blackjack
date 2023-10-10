@@ -27,14 +27,6 @@ public enum Value {
         this.secondValue = secondValue;
     }
 
-    public String getDisplay() {
-        return display;
-    }
-
-    public Integer getPrimaryValue() {
-        return primaryValue;
-    }
-
     public void changePrimaryValue() {
         Integer tmp = primaryValue;
         primaryValue = secondValue;
@@ -43,5 +35,13 @@ public enum Value {
 
     public boolean isAce() {
         return this.equals(ACE);
+    }
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public Integer getPrimaryValue() {
+        return primaryValue;
     }
 }
