@@ -36,7 +36,7 @@ public class Player {
     public static Player createDefault(final String name, final int amount) {
         Deck initialDeck = Deck.createDefaultDeck();
         Name playersName = new Name(name);
-        BettingAmount bettingAmount = new BettingAmount(amount);
+        BettingAmount bettingAmount = BettingAmount.createDefault(amount);
         Revenue initialRevenue = Revenue.createDefaultRevenue();
         return new Player(playersName, initialDeck, bettingAmount, initialRevenue);
     }
