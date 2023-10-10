@@ -10,7 +10,9 @@ import domain.card.Deck;
 
 public class Player {
 
-    private final static String PLAYER_DTO_CARD_DIVIDER = ", ";
+    private static final int UNIQUE_SHOWN_CARD_INDEX=0;
+
+    private static final String PLAYER_DTO_CARD_DIVIDER = ", ";
 
     protected final Name name;
     protected final Deck deck;
@@ -75,7 +77,7 @@ public class Player {
     public void hideCardFromDto(PlayerDeck commonDto) {
         String cardsDto = commonDto.getCards();
         String[] cards = cardsDto.split(PLAYER_DTO_CARD_DIVIDER);
-        commonDto.setCards(cards[0]);
+        commonDto.setCards(cards[UNIQUE_SHOWN_CARD_INDEX]);
     }
 
     public PlayerDeckResult toDtoIncludeResult() {

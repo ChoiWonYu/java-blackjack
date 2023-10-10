@@ -11,6 +11,8 @@ import view.OutputView;
 
 public class BlackJackGameController {
 
+    private static final int DEALER_RESULT_DTO_INDEX=0;
+
     private final InputView reader;
     private final BlackJackGame game;
 
@@ -76,7 +78,7 @@ public class BlackJackGameController {
     private void showResult() {
         PlayerDeckResult dealerResult = game.getDealerResult();
         List<PlayerDeckResult> playerResults = game.getAllPlayerResults();
-        playerResults.add(0, dealerResult);
+        playerResults.add(DEALER_RESULT_DTO_INDEX, dealerResult);
         actEachPlayer(playerResults, OutputView::showDeckWithResult);
     }
 

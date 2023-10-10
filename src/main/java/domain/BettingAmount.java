@@ -2,6 +2,8 @@ package domain;
 
 public class BettingAmount {
 
+    private static final int MIN_BETTING_AMOUNT=0;
+
     private final int bettingAmount;
 
     public BettingAmount(final int bettingAmount) {
@@ -10,7 +12,7 @@ public class BettingAmount {
     }
 
     private void validateAmount(final int bettingAmount) {
-        if (bettingAmount <= 0) {
+        if (bettingAmount <= MIN_BETTING_AMOUNT) {
             throw new IllegalArgumentException();
         }
     }
