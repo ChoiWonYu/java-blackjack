@@ -3,6 +3,7 @@ package domain.card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Cards {
 
@@ -13,15 +14,14 @@ public class Cards {
     }
 
     public static Cards createDefaultCards() {
-        List<Card> defaultCards = new ArrayList<>();
-
         List<Shape> shapes = List.of(Shape.values());
         List<Value> values = List.of(Value.values());
 
-        shapes.stream()
+        List<Card> cards=shapes.stream()
             .flatMap(shape -> values.stream()
-                .map(value -> defaultCards.add(new Card(value, shape))));
-        return new Cards(defaultCards);
+                .map(value -> new Card(value, shape)))
+            .collect(Collectors.toList());
+        return new Cards(cards);
     }
 
     public Card getCard() {
