@@ -79,6 +79,6 @@ public class Deck {
     }
 
     private boolean isPrevSumBetter(int prevSum, int currentSum) {
-        return currentSum > prevSum && prevSum <= MAX_NUMBER;
+        return currentSum < prevSum && prevSum <= MAX_NUMBER;
     }
 }
