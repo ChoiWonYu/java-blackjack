@@ -15,13 +15,12 @@ public class Cards {
     public static Cards createDefaultCards() {
         List<Card> defaultCards = new ArrayList<>();
 
-        Shape[] shapes = Shape.values();
-        Value[] values = Value.values();
-        for (Shape shape : shapes) {
-            for (Value value : values) {
-                defaultCards.add(new Card(value, shape));
-            }
-        }
+        List<Shape> shapes = List.of(Shape.values());
+        List<Value> values = List.of(Value.values());
+
+        shapes.stream()
+            .flatMap(shape -> values.stream()
+                .map(value -> defaultCards.add(new Card(value, shape))));
         return new Cards(defaultCards);
     }
 
