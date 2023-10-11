@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class InputView {
 
+    private static final String NAMES_SPLITTER=",";
+
     private final Scanner reader;
 
     public InputView(final Scanner reader) {
@@ -12,6 +14,11 @@ public class InputView {
 
     public String getInputLine() {
         return reader.nextLine();
+    }
+
+    public String[] getSplitNames() {
+        String input=getInputLine();
+        return input.split(NAMES_SPLITTER);
     }
 
     public int getInteger() {

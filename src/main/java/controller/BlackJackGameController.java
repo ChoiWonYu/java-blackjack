@@ -55,7 +55,7 @@ public class BlackJackGameController {
 
     private void showPlayerNames() {
         List<String> playerNames = game.getPlayerNameValues();
-        OutputView.noticeFirstDealOut(String.join(",", playerNames));
+        OutputView.noticeFirstDealOut(playerNames);
     }
 
     private void getPlayers() {
@@ -65,8 +65,7 @@ public class BlackJackGameController {
 
     private String[] getPlayerNames() {
         OutputView.askPlayerNames();
-        String inputNames = reader.getInputLine();
-        return inputNames.split(",");
+        return reader.getSplitNames();
     }
 
     private void getPlayerBettingAmount(final String name) {

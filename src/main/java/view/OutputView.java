@@ -3,8 +3,11 @@ package view;
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
+import java.util.List;
 
 public class OutputView {
+
+    private static final String NAMES_SPLITTER=",";
 
     public static void askPlayerNames() {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
@@ -15,9 +18,9 @@ public class OutputView {
         System.out.printf("%s의 배팅 금액은?\n", name);
     }
 
-    public static void noticeFirstDealOut(final String names) {
+    public static void noticeFirstDealOut(final List<String> names) {
         newLine();
-        System.out.printf("딜러와 %s에게 2장씩 나누었습니다.\n", names);
+        System.out.printf("딜러와 %s에게 2장씩 나누었습니다.\n", String.join(NAMES_SPLITTER,names));
     }
 
     public static void showPlayerDeck(final PlayerDeck commonDto) {
