@@ -1,5 +1,7 @@
 package controller;
 
+import static controller.AnswerManager.validateAnswer;
+
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
@@ -113,15 +115,5 @@ public class BlackJackGameController {
             }
             OutputView.showPlayerDeck(currentPlayer);
         }
-    }
-
-    private boolean validateAnswer(final String answer) {
-        if (answer.equals("y")) {
-            return true;
-        }
-        if (answer.equals("n")) {
-            return false;
-        }
-        throw new IllegalArgumentException();
     }
 }
