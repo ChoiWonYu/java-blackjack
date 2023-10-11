@@ -12,7 +12,7 @@ public class Players {
 
     private final List<Player> players;
 
-    private Players(List<Player> players) {
+    private Players(final List<Player> players) {
         this.players = players;
     }
 
