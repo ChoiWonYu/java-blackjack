@@ -13,7 +13,7 @@ import view.OutputView;
 
 public class BlackJackGameController {
 
-    private static final int DEALER_RESULT_DTO_INDEX=0;
+    private static final int DEALER_RESULT_DTO_INDEX = 0;
 
     private final InputView reader;
     private final BlackJackGame game;
