@@ -1,63 +1,80 @@
 package service;
 
 import domain.Dealer;
+import domain.GameResult;
+import domain.GameResults;
 import domain.Player;
+import domain.Players;
 
 public class RevenueCalculator {
 
     private final static double BLACK_JACK_DIVIDEND_YIELD = 1.5;
 
     private final Dealer dealer;
-    private Player player;
+    private final Players players;
+    private final GameResults gameResults;
 
-    private RevenueCalculator(final Dealer dealer, final Player player) {
+    private RevenueCalculator(final Dealer dealer, final Players players,
+        final GameResults results) {
         this.dealer = dealer;
-        this.player = player;
+        this.players = players;
+        this.gameResults = results;
     }
 
-    public static RevenueCalculator createCalculatorWithoutPlayer(final Dealer dealer) {
-        return new RevenueCalculator(dealer, null);
+    public static RevenueCalculator createCalculator(final Dealer dealer, final Players players) {
+        GameResults initialResults = GameResults.createDefault();
+        GameResult dealerGameResult = GameResult.createDefault(dealer.getName());
+        initialResults.addGameResult(dealerGameResult);
+        players.getNames()
+            .forEach(name -> {
+                GameResult result = GameResult.createDefault(name);
+                initialResults.addGameResult(result);
+            });
+        return new RevenueCalculator(dealer, players, initialResults);
     }
 
-    private void setPlayer(Player player) {
-        if (player == null) {
-            throw new IllegalArgumentException();
-        }
-        this.player = player;
+    public GameResults calculateRevenues() {
+        players.actEachPlayer(this::calculateRevenue);
+        return gameResults;
     }
 
     public void calculateRevenue(Player player) {
-        setPlayer(player);
-
-        boolean haveToHandleBlackJack = anyoneBlackJack();
-        boolean haveToHandleBurst = anyoneBurst();
+        boolean haveToHandleBlackJack = anyoneBlackJack(player);
+        boolean haveToHandleBurst = anyoneBurst(player);
         if (haveToHandleBurst) {
-            handleBurst();
+            handleBurst(player);
             return;
         }
         if (haveToHandleBlackJack) {
-            handleBlackJack();
+            handleBlackJack(player);
             return;
         }
-        handleCommonRevenue();
+        handleCommonRevenue(player);
     }
 
-    private void handleCommonRevenue() {
+    private void handleCommonRevenue(Player player) {
         boolean isPlayerWin = player.hasBiggerSum(dealer.getCardSum());
         double playerBettingAmount = player.getBettingAmount();
+
+        GameResult playerResult = gameResults.findByName(player.getName());
+        GameResult dealerResult = gameResults.findByName(dealer.getName());
+
         if (isPlayerWin) {
-            player.winAmount(playerBettingAmount);
-            dealer.lostAmount(playerBettingAmount);
+            playerResult.winRevenue(playerBettingAmount);
+            dealerResult.lostRevenue(playerBettingAmount);
             return;
         }
-        dealer.winAmount(playerBettingAmount);
-        player.lostAmount(playerBettingAmount);
+        dealerResult.winRevenue(playerBettingAmount);
+        playerResult.lostRevenue(playerBettingAmount);
     }
 
-    private void handleBlackJack() {
+    private void handleBlackJack(Player player) {
         boolean isDealerBlackJack = dealer.isBlackJack();
         boolean isPlayerBlackJack = player.isBlackJack();
         double playerBettingAmount = player.getBettingAmount();
+
+        GameResult playerResult = gameResults.findByName(player.getName());
+        GameResult dealerResult = gameResults.findByName(dealer.getName());
 
         if (bothBlackJack(isDealerBlackJack, isPlayerBlackJack)) {
             return;
@@ -65,26 +82,29 @@ public class RevenueCalculator {
 
         if (isPlayerBlackJack) {
             playerBettingAmount *= BLACK_JACK_DIVIDEND_YIELD;
-            player.winAmount(playerBettingAmount);
-            dealer.lostAmount(playerBettingAmount);
+            playerResult.winRevenue(playerBettingAmount);
+            dealerResult.lostRevenue(playerBettingAmount);
             return;
         }
-        player.lostAmount(playerBettingAmount);
-        dealer.winAmount(playerBettingAmount);
+        playerResult.lostRevenue(playerBettingAmount);
+        dealerResult.winRevenue(playerBettingAmount);
     }
 
-    private void handleBurst() {
+    private void handleBurst(Player player) {
         boolean isPlayerBurst = player.isBurst();
         double playerBettingAmount = player.getBettingAmount();
 
+        GameResult playerResult = gameResults.findByName(player.getName());
+        GameResult dealerResult = gameResults.findByName(dealer.getName());
+
         if (isPlayerBurst) {
-            player.lostAmount(playerBettingAmount);
-            dealer.winAmount(playerBettingAmount);
+            playerResult.lostRevenue(playerBettingAmount);
+            dealerResult.winRevenue(playerBettingAmount);
             return;
         }
 
-        player.winAmount(playerBettingAmount);
-        dealer.lostAmount(playerBettingAmount);
+        playerResult.winRevenue(playerBettingAmount);
+        dealerResult.lostRevenue(playerBettingAmount);
     }
 
     private boolean bothBlackJack(final boolean isDealerBlackJack,
@@ -92,11 +112,11 @@ public class RevenueCalculator {
         return isDealerBlackJack && isPlayerBlackJack;
     }
 
-    private boolean anyoneBlackJack() {
+    private boolean anyoneBlackJack(Player player) {
         return dealer.isBlackJack() || player.isBlackJack();
     }
 
-    private boolean anyoneBurst() {
+    private boolean anyoneBurst(Player player) {
         return dealer.isBurst() || player.isBurst();
     }
 }
