@@ -7,8 +7,7 @@ import static domain.card.Value.SEVEN;
 import static domain.card.Value.TWO;
 import static fixture.RevenueFixture.getPlayerRevenue;
 import static fixture.RevenueFixture.giveTwoCardToPlayer;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import domain.Dealer;
 import domain.GameResults;
@@ -50,9 +49,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, BLACKJACK_PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, -BLACKJACK_PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(BLACKJACK_PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(-BLACKJACK_PLAYER_BETTING_AMOUNT);
         });
     }
 
@@ -69,9 +68,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, -PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(-PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(PLAYER_BETTING_AMOUNT);
         });
     }
 
@@ -88,9 +87,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, 0);
-            assertEquals(dealerRevenue, 0);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(0);
+            softly.assertThat(dealerRevenue).isEqualTo(0);
         });
     }
 
@@ -107,9 +106,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, -PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(-PLAYER_BETTING_AMOUNT);
         });
     }
 
@@ -126,9 +125,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, -PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(-PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(PLAYER_BETTING_AMOUNT);
         });
     }
 
@@ -146,9 +145,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, -PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(-PLAYER_BETTING_AMOUNT);
         });
     }
 
@@ -166,9 +165,9 @@ class RevenueCalculatorTest {
         double dealerRevenue = getPlayerRevenue(results, dealer);
 
         // then
-        assertAll(() -> {
-            assertEquals(playerRevenue, -PLAYER_BETTING_AMOUNT);
-            assertEquals(dealerRevenue, PLAYER_BETTING_AMOUNT);
+        assertSoftly((softly) -> {
+            softly.assertThat(playerRevenue).isEqualTo(-PLAYER_BETTING_AMOUNT);
+            softly.assertThat(dealerRevenue).isEqualTo(PLAYER_BETTING_AMOUNT);
         });
     }
 }
