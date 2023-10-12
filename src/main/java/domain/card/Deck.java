@@ -28,9 +28,7 @@ public class Deck {
 
     public List<String> getCardInfo() {
         return deck.stream()
-            .map(card ->
-                card.getDisplay() + card.getShape()
-            )
+            .map(Card::getCardInfo)
             .collect(Collectors.toList());
     }
 

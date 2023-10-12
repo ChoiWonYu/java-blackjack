@@ -14,12 +14,8 @@ public class Card {
         return value.getPrimaryValue();
     }
 
-    public String getDisplay() {
-        return value.getDisplay();
-    }
-
-    public String getShape() {
-        return shape.getShape();
+    public String getCardInfo() {
+        return value.getDisplay() + shape.getShape();
     }
 
     public boolean isAceCard() {
