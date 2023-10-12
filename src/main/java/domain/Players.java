@@ -2,6 +2,7 @@ package domain;
 
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
+import controller.mapper.PlayerMapper;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
@@ -51,7 +52,7 @@ public class Players {
 
     public List<PlayerDeck> getPlayers() {
         return players.stream()
-            .map(Player::toCommonDto)
+            .map(PlayerMapper::playerToCommonDto)
             .collect(Collectors.toList());
     }
 
@@ -64,7 +65,7 @@ public class Players {
 
     public List<PlayerDeckResult> getPlayerResults() {
         return players.stream()
-            .map(Player::toDtoIncludeResult)
+            .map(PlayerMapper::playerToResultDeck)
             .collect(Collectors.toList());
     }
 }

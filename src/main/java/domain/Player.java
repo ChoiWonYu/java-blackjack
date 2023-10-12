@@ -2,16 +2,10 @@ package domain;
 
 import java.util.List;
 
-import controller.dto.PlayerDeck;
-import controller.dto.PlayerDeckResult;
 import domain.card.Card;
 import domain.card.Deck;
 
 public class Player {
-
-    private static final int UNIQUE_SHOWN_CARD_INDEX = 0;
-
-    private static final String PLAYER_DTO_CARD_DIVIDER = ", ";
 
     protected final Name name;
     protected final Deck deck;
@@ -61,23 +55,6 @@ public class Player {
 
     public List<String> getCardInfos() {
         return deck.getCardInfo();
-    }
-
-    public PlayerDeck toCommonDto() {
-        List<String> cardInfos = getCardInfos();
-        return new PlayerDeck(getNameValue(), String.join(PLAYER_DTO_CARD_DIVIDER, cardInfos));
-    }
-
-    public void hideCardFromDto(PlayerDeck commonDto) {
-        String cardsDto = commonDto.getCards();
-        String[] cards = cardsDto.split(PLAYER_DTO_CARD_DIVIDER);
-        commonDto.setCards(cards[UNIQUE_SHOWN_CARD_INDEX]);
-    }
-
-    public PlayerDeckResult toDtoIncludeResult() {
-        int scoreSum = getCardSum();
-        PlayerDeck commonDto = toCommonDto();
-        return PlayerDeckResult.of(commonDto, scoreSum);
     }
 
     public boolean hasSameNameValue(final String playerName) {

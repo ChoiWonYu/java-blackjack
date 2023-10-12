@@ -1,5 +1,9 @@
 package service;
 
+import static controller.mapper.PlayerMapper.hideCardFromDto;
+import static controller.mapper.PlayerMapper.playerToCommonDto;
+import static controller.mapper.PlayerMapper.playerToResultDeck;
+
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
@@ -52,7 +56,7 @@ public class BlackJackGame {
         Card pickedCard = pickCard();
         Player player = players.getPlayerByName(playerName);
         player.addCardToDeck(pickedCard);
-        return player.toCommonDto();
+        return playerToCommonDto(player);
     }
 
     public List<String> getPlayerNameValues() {
@@ -64,8 +68,8 @@ public class BlackJackGame {
     }
 
     public PlayerDeck getDealer() {
-        PlayerDeck commonDto = dealer.toCommonDto();
-        dealer.hideCardFromDto(commonDto);
+        PlayerDeck commonDto = playerToCommonDto(dealer);
+        hideCardFromDto(commonDto);
         return commonDto;
     }
 
@@ -84,7 +88,7 @@ public class BlackJackGame {
     }
 
     public PlayerDeckResult getDealerResult() {
-        return dealer.toDtoIncludeResult();
+        return playerToResultDeck(dealer);
     }
 
     public List<PlayerDeckResult> getAllPlayerResults() {
