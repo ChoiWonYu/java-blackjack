@@ -30,8 +30,8 @@ public class GameResult {
     }
 
     public PlayerRevenue toDto() {
-         String name=playerName.getName();
-         double resultRevenue=revenue.getRevenue();
+        String name = playerName.getName();
+        double resultRevenue = revenue.getRevenue();
 
         return new PlayerRevenue(name, resultRevenue);
     }

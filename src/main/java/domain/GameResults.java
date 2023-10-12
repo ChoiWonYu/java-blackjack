@@ -10,7 +10,7 @@ public class GameResults {
     private final List<GameResult> gameResults;
 
     private GameResults(final List<GameResult> gameResults) {
-        this.gameResults=gameResults;
+        this.gameResults = gameResults;
     }
 
     public static GameResults createDefault() {
@@ -23,7 +23,7 @@ public class GameResults {
 
     public GameResult findByName(Name name) {
         return gameResults.stream()
-            .filter(result->result.hasSameName(name))
+            .filter(result -> result.hasSameName(name))
             .findFirst()
             .orElseThrow(IllegalArgumentException::new);
     }
