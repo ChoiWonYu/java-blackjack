@@ -3,6 +3,7 @@ package service;
 import controller.dto.PlayerDeck;
 import controller.dto.PlayerDeckResult;
 import controller.dto.PlayerRevenue;
+import domain.GameResults;
 import domain.card.Card;
 import domain.card.Cards;
 import domain.Dealer;
@@ -18,23 +19,18 @@ public class BlackJackGame {
     private final Dealer dealer;
     private final Players players;
     private final Cards cards;
-    private final RevenueCalculator calculator;
 
-    private BlackJackGame(final Dealer dealer, final Players players, final Cards cards,
-        RevenueCalculator calculator) {
+    private BlackJackGame(final Dealer dealer, final Players players, final Cards cards) {
         this.dealer = dealer;
         this.players = players;
         this.cards = cards;
-        this.calculator = calculator;
     }
 
     public static BlackJackGame createDefaultGame() {
         Dealer defaultDealer = Dealer.createDefaultDealer();
         Cards cards = Cards.createDefaultCards();
         Players players = Players.createInitialPlayers(new ArrayList<>());
-        RevenueCalculator revenueCalculator = RevenueCalculator.createCalculatorWithoutPlayer(
-            defaultDealer);
-        return new BlackJackGame(defaultDealer, players, cards, revenueCalculator);
+        return new BlackJackGame(defaultDealer, players, cards);
     }
 
     public void createGamePlayer(final String name, final int bettingAmount) {
@@ -95,15 +91,10 @@ public class BlackJackGame {
         return players.getPlayerResults();
     }
 
-    public void calculateRevenue() {
-        players.actEachPlayer(calculator::calculateRevenue);
-    }
-
-    public List<PlayerRevenue> getPlayersRevenue() {
-        PlayerRevenue dealerRevenue = dealer.toRevenueDto();
-        List<PlayerRevenue> playerRevenues = players.getPlayerRevenueResults();
-        playerRevenues.add(0, dealerRevenue);
-        return new ArrayList<>(playerRevenues);
+    public List<PlayerRevenue> calculateRevenue() {
+        RevenueCalculator calculator = RevenueCalculator.createCalculator(dealer, players);
+        GameResults results = calculator.calculateRevenues();
+        return results.getPlayerRevenues();
     }
 
     private Card pickCard() {
