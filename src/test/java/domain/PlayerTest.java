@@ -28,7 +28,7 @@ class PlayerTest {
     @DisplayName("첫 두 장의 카드가 21이면 블랙잭")
     public void when_first_two_cards_sum_21_blackjack() {
         // given
-        List<Card> cards= CardsFixture.pickCards(KING, ACE);
+        List<Card> cards = CardsFixture.pickCards(KING, ACE);
 
         // when
         player.addCardsToDeck(cards);
@@ -41,7 +41,7 @@ class PlayerTest {
     @DisplayName("카드의 총합이 21을 넘으면 Burst")
     public void when_card_sum_over_21_burst() {
         // given
-        List<Card> cards= CardsFixture.pickCards(KING, QUEEN);
+        List<Card> cards = CardsFixture.pickCards(KING, QUEEN);
         Card newCard = new Card(JACK, CLOVER);
 
         // when
@@ -55,7 +55,7 @@ class PlayerTest {
     @DisplayName("0보다 같거나 작은 amount로 플레이어를 생성하면 에러")
     public void when_create_player_with_less_then_zero_amount_throw_exception() {
         // given
-        int amount=0;
+        int amount = 0;
 
         // when & then
         assertThrows(IllegalArgumentException.class, () ->

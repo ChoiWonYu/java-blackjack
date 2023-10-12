@@ -23,7 +23,7 @@ class DealerTest {
     @DisplayName("17이상이면 카드를 뽑을 수 없다고 알려준다.")
     public void when_sum_over_17_have_to_pick_more_card() {
         // given
-        List<Card> cards= CardsFixture.pickCards(Value.SEVEN, Value.KING);
+        List<Card> cards = CardsFixture.pickCards(Value.SEVEN, Value.KING);
 
         // when
         dealer.addCardsToDeck(cards);
