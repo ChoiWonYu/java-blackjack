@@ -17,7 +17,7 @@ public class Cards {
         List<Shape> shapes = List.of(Shape.values());
         List<Value> values = List.of(Value.values());
 
-        List<Card> cards=shapes.stream()
+        List<Card> cards = shapes.stream()
             .flatMap(shape -> values.stream()
                 .map(value -> new Card(value, shape)))
             .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class Cards {
     public List<Card> pickInitialCards(final int initialCardsCount) {
         List<Card> pickedCards = new ArrayList<>();
         for (int i = 0; i < initialCardsCount; i++) {
-            Card pickedCard = getCard();
+                Card pickedCard = getCard();
             pickedCards.add(pickedCard);
         }
         return pickedCards;
