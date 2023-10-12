@@ -46,12 +46,11 @@ public class BlackJackGameController {
         checkDealerDeck();
         OutputView.newLine();
 
-        game.calculateRevenue();
         showResult();
         OutputView.newLine();
 
         OutputView.noticeRevenueDescription();
-        List<PlayerRevenue> revenues = game.getPlayersRevenue();
+        List<PlayerRevenue> revenues = game.calculateRevenue();
         actEachPlayer(revenues, OutputView::showRevenues);
     }
 
