@@ -8,7 +8,7 @@ import domain.Players;
 
 public class RevenueCalculator {
 
-    private final static double BLACK_JACK_DIVIDEND_YIELD = 1.5;
+    private static final double BLACK_JACK_DIVIDEND_YIELD = 1.5;
 
     private final Dealer dealer;
     private final Players players;

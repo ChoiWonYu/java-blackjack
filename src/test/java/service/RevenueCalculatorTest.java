@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 class RevenueCalculatorTest {
 
-    private final int PLAYER_BETTING_AMOUNT = 1000;
-    private final int BLACKJACK_PLAYER_BETTING_AMOUNT = 1500;
+    private static final int PLAYER_BETTING_AMOUNT = 1000;
+    private static final int BLACKJACK_PLAYER_BETTING_AMOUNT = 1500;
 
     private Dealer dealer;
     private Player player;
