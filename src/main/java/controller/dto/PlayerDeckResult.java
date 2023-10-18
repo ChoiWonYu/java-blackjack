@@ -4,7 +4,7 @@ public class PlayerDeckResult extends PlayerDeck {
 
     private final int result;
 
-    public PlayerDeckResult(final String name, final String cards, final int result) {
+    private PlayerDeckResult(final String name, final String cards, final int result) {
         super(name, cards);
         this.result = result;
     }
