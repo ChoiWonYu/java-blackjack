@@ -47,6 +47,7 @@ class PlayerTest {
         // when
         player.addCardsToDeck(cards);
         player.addCardToDeck(newCard);
+
         // then
         assertTrue(player.isBurst());
     }
