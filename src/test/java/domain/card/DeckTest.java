@@ -5,8 +5,7 @@ import static domain.card.Value.ACE;
 import static domain.card.Value.KING;
 import static domain.card.Value.QUEEN;
 import static domain.card.Value.SEVEN;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fixture.CardsFixture;
@@ -67,9 +66,11 @@ class DeckTest {
         addCardToDeck(SEVEN);
 
         // when & then
-        assertFalse(deck.isBurst());
-        assertEquals(ACE.getPrimaryValue(), 1);
-        assertEquals(deck.getBestSum(), 1 + 10 + 7);
+        assertSoftly((softly) -> {
+            softly.assertThat(deck.isBurst()).isFalse();
+            softly.assertThat(ACE.getPrimaryValue()).isEqualTo(1);
+            softly.assertThat(deck.getBestSum()).isEqualTo(1 + 10 + 7);
+        });
     }
 
     private void addCardToDeck(Value value) {
